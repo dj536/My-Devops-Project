@@ -30,7 +30,14 @@ jobs:
         with:
           node-version: 18
           cache: npm
-deploy:
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+  deploy:
     needs: test
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
@@ -46,12 +53,6 @@ deploy:
         uses: akhileshns/heroku-deploy@v3.14.15
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: "webappjs"
-          heroku_email: "mdmark11ai@gmail.com"
+          heroku_app_name: "immense-fortress-96225"
+          heroku_email: "djidonoujustin11@gmail.com"
           branch: main
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run tests
-        run: npm test
